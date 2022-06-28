@@ -1,0 +1,59 @@
+﻿@model List<FirsBlog_Core.DTOs.Categories.CategoryDTO>
+@{ ViewData["title"] = "دسته بندی ها";
+    ViewData["selected"] = "Category";
+    var counter = 1;
+}
+<section class="content-header">
+    <h1>
+        @ViewData["title"];
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="admin" asp-controller="category" asp-action="index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li><a href="#">مثال ها</a></li>
+        <li class="active">@ViewData["title"]</li>
+    </ol>
+</section>
+<section class="content-wrapper">
+    <a class="btn btn-Submit" asp-area="admin" asp-controller="Category" asp-action="AddCategory" >افزودن دسته بندی جدید</a>
+    <div class="box box-primary">
+        <div class="box box-body">
+            <table class="table table-bordered table-hover" >
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>عنوان</th>
+                        <th>زیرگروه ها</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.Where(m=> m.ParentId==null))
+                    {
+                        <tr>
+                            <td>@counter</td>
+                            <td>@item.Title</td>
+                            <td>
+                                @if(Model.Any(s=> s.ParentId == item.Id))
+                                {
+                                    <ul>
+                                        @foreach (var SubCategory in Model.Where(m => m.ParentId == item.Id))
+                                        { 
+                                        <li>@SubCategory.Title</li>
+                                        }
+                                    </ul>   
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-info" asp-area="admin" asp-controller="Category" asp-action="EditCategory" asp-route-Id="@item.Id">ویرایش</a>
+                                <a class="btn btn-info" asp-area="admin" asp-controller="Category" asp-action="AddCategory" asp-route-ParentId="@item.Id">افزودن زیر گروه</a>
+                            </td>
+                        </tr>
+                        counter+=1;
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>

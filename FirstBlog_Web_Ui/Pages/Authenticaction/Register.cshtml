@@ -1,0 +1,61 @@
+﻿@page
+@model FirstBlog_Web_Ui.Pages.Authenticaction.RegisterModel
+@{
+    Layout = "Shared/_AuthLayout";
+}
+<div class="container" >
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>Register</h3>
+                <div class="d-flex justify-content-end social_icon">
+                    <span><i class="fab fa-facebook-square"></i></span>
+                    <span><i class="fab fa-google-plus-square"></i></span>
+                    <span><i class="fab fa-twitter-square"></i></span>
+                </div>
+            </div>
+            <div class="card-body" >
+                <form method="post">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" asp-for="UserName" class="form-control" placeholder="username"><br/>
+                        <span asp-validation-for="UserName"></span>
+
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" asp-for="FullName" class="form-control" placeholder="FullName"> <br/>
+                        <span  asp-validation-for="FullName"></span>
+
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" asp-for="Password" class="form-control" placeholder="password"><br/>
+                        <span asp-validation-for="Password"></span>
+
+                    </div>
+                    <div class="row align-items-center remember">
+                        <input type="checkbox">Remember Me
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn float-right login_btn">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    Already have an account?<a asp-page="Login">Login</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                    @*<a href="#">Forgot your password?</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

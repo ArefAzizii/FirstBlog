@@ -1,0 +1,57 @@
+﻿@model FirsBlog_Core.DTOs.Posts.PostFilterDto
+@{ ViewData["title"] = "مقاله ها";
+    ViewData["selected"] = "category";
+    var counter = 1;
+}
+<section class="content-header">
+    <h1>
+        @ViewData["title"];
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-area="admin" asp-controller="category" asp-action="index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li><a href="#">مثال ها</a></li>
+        <li class="active">@ViewData["title"]</li>
+    </ol>
+</section>
+<section class="content-wrapper">
+    <a class="btn btn-Submit" asp-area="admin" asp-controller="Category" asp-action="AddCategory">افزودن مقاله جدید</a>
+    <div class="box box-primary">
+        <div class="box box-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>عکس</th>
+                        <th>عنوان</th>
+                        <th>Slug</th>
+                        <th>گروه</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.Posts)
+                    {
+                        <tr>
+                            <td>@counter</td>
+                             <td>
+                                 <img src="/image/@item.ImageName" />
+                            </td>  
+                            <td>
+                             @item.Title
+                            </td>
+                            <td>@item.Slug</td>
+                            <td>@item.Category.Title
+                            </td>
+                            <td>
+                                <a class="btn btn-info" asp-area="admin" asp-controller="Post" asp-action="EditPost" asp-route-Id="@item.PostId">ویرایش</a>
+                            </td>
+                        </tr>
+                        counter += 1;
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>
